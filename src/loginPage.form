@@ -8,36 +8,40 @@
     <properties/>
     <border type="none"/>
     <children>
-      <component id="62cf4" class="javax.swing.JButton" binding="button1" default-binding="true">
+      <component id="62cf4" class="javax.swing.JButton" binding="login">
         <constraints>
-          <grid row="3" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="4" height="2"/>
+          </grid>
         </constraints>
         <properties>
-          <text value="Button"/>
+          <text value="Login"/>
         </properties>
       </component>
-      <component id="275cf" class="javax.swing.JButton" binding="button2" default-binding="true">
+      <component id="275cf" class="javax.swing.JButton" binding="about">
         <constraints>
-          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="4" height="2"/>
+          </grid>
         </constraints>
         <properties>
-          <text value="Button"/>
+          <text value="About"/>
         </properties>
       </component>
-      <component id="f89ca" class="javax.swing.JCheckBox" binding="checkBox1" default-binding="true">
+      <component id="f89ca" class="javax.swing.JCheckBox" binding="rememberMe">
         <constraints>
           <grid row="2" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="CheckBox"/>
+          <text value="Remember me"/>
         </properties>
       </component>
-      <component id="1bc7e" class="javax.swing.JCheckBox" binding="checkBox2" default-binding="true">
+      <component id="1bc7e" class="javax.swing.JCheckBox" binding="showPassword">
         <constraints>
           <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="CheckBox"/>
+          <text value="Show password"/>
         </properties>
       </component>
       <component id="1898f" class="javax.swing.JLabel" binding="userName">
@@ -56,20 +60,20 @@
         </constraints>
         <properties/>
       </component>
-      <component id="3db5" class="javax.swing.JButton" binding="button3" default-binding="true">
+      <component id="3db5" class="javax.swing.JButton" binding="reset">
         <constraints>
           <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Button"/>
+          <text value="Reset"/>
         </properties>
       </component>
-      <component id="3473e" class="javax.swing.JButton" binding="button4" default-binding="true">
+      <component id="3473e" class="javax.swing.JButton" binding="hint">
         <constraints>
           <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Button"/>
+          <text value="Hint"/>
         </properties>
       </component>
       <component id="3bf82" class="javax.swing.JLabel" binding="password">
@@ -77,7 +81,7 @@
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Label"/>
+          <text value="Password"/>
         </properties>
       </component>
       <component id="f1869" class="javax.swing.JPasswordField" binding="jpf">
