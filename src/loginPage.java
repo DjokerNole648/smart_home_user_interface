@@ -14,6 +14,8 @@ public class loginPage extends JFrame{
     private JPanel origin;
     private JLabel userName;
     private JLabel password;
+    private JLabel kul;
+    private JPanel welkom;
     private static int ID;
     private final DB db;
 
@@ -33,6 +35,8 @@ public class loginPage extends JFrame{
         password.setIcon(new ImageIcon("src/icons/password.png"));
         hint.setIcon(new ImageIcon("src/icons/Hint.png"));
         reset.setIcon(new ImageIcon("src/icons/reset.png"));
+        kul.setIcon(new ImageIcon("src/icons/KU_Leuven_logo.svg.png"));
+
         db = new DB();
 
         about.addActionListener(actionEvent -> JOptionPane.showMessageDialog(origin,
