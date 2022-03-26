@@ -10,6 +10,8 @@ import java.util.Objects;
 import org.json.*;
 
 public class DB {
+    private static final DB db = new DB();
+    private final static String response = db.makeGETRequest("https://studev.groept.be/api/a21ib2c04/selectuser");
 
     public String makeGETRequest(String urlName){
         BufferedReader rd = null;
@@ -32,19 +34,6 @@ public class DB {
             e.printStackTrace();
         }
         return "";
-
-    }
-
-    public void updateData (String urlName){
-        try {         //THIS CONNECTION HAS POTENTIAL FOR ERRORS
-            URL url = new URL(urlName);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.connect();  //open the connection
-            conn.disconnect(); //no more lines, disconnect
-        } catch (IOException e){
-            e.printStackTrace();
-        }
     }
 
     public void parseJSON(String jsonString){
@@ -84,19 +73,15 @@ public class DB {
     }
 
     public void rememberLastUser(String jsonString, String user, String password){
-        DB db = new DB();
         try {
             JSONArray array = new JSONArray(jsonString);
+            db.makeGETRequest("https://studev.groept.be/api/a21ib2c04/reset_lastRemember");
             for (int i = 0; i < array.length(); i++)
             {
                 JSONObject curObject = array.getJSONObject(i);
-        //update lastRemember to 0 if 1 is already existed in the database        if(curObject.getInt("lastRemember") == 1)
-        //update lastRemember to 0 if 1 is already existed in the database
-                if(Objects.equals(curObject.getString("NAME"), user) &&
-                        Objects.equals(curObject.getString("PASSWORD"), password))
-                    //If there is a user already existed, set the lastRemember as true
+                if(checkUser(response, user, password))
                     db.makeGETRequest(
-                            "https://studev.groept.be/api/a21ib2c04/update_lastRemember/" + App.ID);
+                            "https://studev.groept.be/api/a21ib2c04/update_lastRemember/" + getUserID(response, user));
             }
         }
         catch (JSONException e){
@@ -153,6 +138,23 @@ public class DB {
         return userName;
     }
 
+    public String getRememberedUserName(String jsonString){
+        String remembereduserName = null;
+        try {
+            JSONArray array = new JSONArray(jsonString);
+            for (int i = 0; i < array.length(); i++)
+            {
+                JSONObject curObject = array.getJSONObject(i);
+                if(curObject.getInt("lastRemember") == 1)
+                    remembereduserName = curObject.getString("NAME");
+            }
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+        return remembereduserName;
+    }
+
     public String getPassword(String jsonString, int ID){
         String password = null;
         try{
@@ -168,6 +170,23 @@ public class DB {
             e.printStackTrace();
         }
         return password;
+    }
+
+    public String getRememberedPassword(String jsonString){
+        String rememberedpassword = null;
+        try{
+            JSONArray array = new JSONArray(jsonString);
+            for(int i = 0; i < array.length(); i++)
+            {
+                JSONObject curObject = array.getJSONObject(i);
+                if(curObject.getInt("lastRemember") == 1)
+                    rememberedpassword = curObject.getString("PASSWORD");
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return rememberedpassword;
     }
 
     public String getString(String jsonString, String desiredType){

@@ -1,6 +1,8 @@
 import javax.swing.*;
 
 public class App {
+    private static final DB db = new DB();
+    private final static String response = db.makeGETRequest("https://studev.groept.be/api/a21ib2c04/selectuser");
     protected static int ID = 1;
 
     public App(int ID){
@@ -9,15 +11,13 @@ public class App {
 
     public static void main(String[] args)
     {
-        JFrame login = new logIn();
-        DB db = new DB();
-        if(db.checkIfRemember("https://studev.groept.be/api/a21ib2c04/selectuser")){
-            logIn.jtf.setText(db.getUserName("https://studev.groept.be/api/a21ib2c04/selectuser", ID));
-            logIn.jpf.setText(db.getPassword("https://studev.groept.be/api/a21ib2c04/selectuser", ID));
+        JFrame page = new loginPage();
+        loginPage newPage = new loginPage();
+        if(db.checkIfRemember(response)){
+            newPage.jtf.setText(db.getRememberedUserName(response));
+            newPage.jpf.setText(db.getRememberedPassword(response));
         }
-        login.setVisible(true);
-        App app = new App(ID);
+        page.setVisible(true);
 
-        //mainPage.pack();
     }
 }

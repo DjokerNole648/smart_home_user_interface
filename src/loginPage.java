@@ -6,38 +6,41 @@ public class loginPage extends JFrame{
     private JButton about;
     private JCheckBox rememberMe;
     private JCheckBox showPassword;
-    private JTextField jtf;
+    JTextField jtf;
     private JButton reset;
-    private JPasswordField jpf;
+    JPasswordField jpf;
     private JButton hint;
     private JLabel welcome;
     private JPanel origin;
     private JLabel userName;
     private JLabel password;
     private JLabel kul;
-    private JPanel welkom;
     private static int ID;
-    private final DB db;
+    private JPanel welkom;
+    private static final DB db = new DB();
+    private final static String response = db.makeGETRequest("https://studev.groept.be/api/a21ib2c04/selectuser");
 
     public static void main(String[] args) {
-        loginPage page = new loginPage("Welcome to the smart house!");
+        loginPage page = new loginPage();
         page.setVisible(true);
         page.pack();
+
+        if(db.checkIfRemember(response)){
+            page.jtf.setText(db.getRememberedUserName(response));
+            page.jpf.setText(db.getRememberedPassword(response));
+        }
     }
 
-    public loginPage(String title) {
-        super(title);
+    public loginPage() {
         setContentPane(origin);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setIconImage(new ImageIcon("src/icons/logo.png").getImage());
 
+        this.setIconImage(new ImageIcon("src/icons/logo.png").getImage());
         userName.setIcon(new ImageIcon("src/icons/username.png"));
         password.setIcon(new ImageIcon("src/icons/password.png"));
         hint.setIcon(new ImageIcon("src/icons/Hint.png"));
         reset.setIcon(new ImageIcon("src/icons/reset.png"));
         kul.setIcon(new ImageIcon("src/icons/KU_Leuven_logo.svg.png"));
-
-        db = new DB();
 
         about.addActionListener(actionEvent -> JOptionPane.showMessageDialog(origin,
                 """
@@ -61,15 +64,13 @@ public class loginPage extends JFrame{
 
         login.addActionListener(e -> {
 
-            ID = db.getUserID(db.makeGETRequest("https://studev.groept.be/api/a21ib2c04/selectuser"), jtf.getText());
-            String response = db.makeGETRequest("https://studev.groept.be/api/a21ib2c04/selectuser");
+            ID = db.getUserID(response, jtf.getText());
 
             if(jtf.getText().length() == 0 || jpf.getText().length() == 0){
-                JOptionPane.showMessageDialog(null, "Username and password are required for login!",
+                JOptionPane.showMessageDialog(origin, "Username and password are required for login!",
                         "Oops!", JOptionPane.WARNING_MESSAGE);
             }
             else if(db.checkUser(response, jtf.getText(), String.valueOf(jpf.getPassword()))){
-                //jump to next page
                 App app = new App(ID);
                 JFrame mainPage = new mainPage("main page");
                 mainPage.setVisible(true);
@@ -78,7 +79,7 @@ public class loginPage extends JFrame{
             }
             else
             {
-                JOptionPane.showMessageDialog(null,
+                JOptionPane.showMessageDialog(origin,
                         "Sorry your username or password is invalid, if you need help please click forget!",
                         "Oops", JOptionPane.ERROR_MESSAGE);
             }
@@ -94,8 +95,6 @@ public class loginPage extends JFrame{
         });
 
         rememberMe.addItemListener(e -> {
-            DB db = new DB();
-            String response = db.makeGETRequest("https://studev.groept.be/api/a21ib2c04/selectuser");
             if(e.getStateChange() == ItemEvent.SELECTED){
                 db.rememberLastUser(response, jtf.getText(), String.valueOf(jpf.getPassword()));
             }
