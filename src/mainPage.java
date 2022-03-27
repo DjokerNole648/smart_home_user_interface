@@ -27,6 +27,7 @@ public class mainPage extends JFrame{ //1
         super(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setContentPane(mainPage);                             //2
+        this.setIconImage(new ImageIcon("src/icons/logo.png").getImage());
 
         //someonesHome.setText("someone" + "'s home"); //getUsername()
         DB db = new DB();

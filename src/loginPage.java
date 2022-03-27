@@ -21,7 +21,7 @@ public class loginPage extends JFrame{
     private final static String response = db.makeGETRequest("https://studev.groept.be/api/a21ib2c04/selectuser");
 
     public static void main(String[] args) {
-        loginPage page = new loginPage();
+        loginPage page = new loginPage("Welcome to the smart home!");
         page.setVisible(true);
         page.pack();
 
@@ -31,7 +31,8 @@ public class loginPage extends JFrame{
         }
     }
 
-    public loginPage() {
+    public loginPage(String title) {
+        super("Welcome to the smart home!");
         setContentPane(origin);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -52,9 +53,9 @@ public class loginPage extends JFrame{
 
         hint.addActionListener(e -> JOptionPane.showMessageDialog(origin,
                 """
-                        The Username is your student email and password is your full name plus 123
-                        For example: your name is Novak Djokovic then your Username is novak.djokovic@student.kuleuven.be and password is NovakDjokovic123
-                        Or you can use Admin, Admin123 to sample this system""",
+                        The username is your full name and password is your username plus 123
+                        For example: your name is Novak Djokovic then your Username is NovakDjokovic and password is NovakDjokovic123
+                        Or you can use Admin; Admin123 to sample this system""",
                 "Hint", JOptionPane.INFORMATION_MESSAGE));
 
         reset.addActionListener(e -> {

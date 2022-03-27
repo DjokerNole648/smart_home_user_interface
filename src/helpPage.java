@@ -9,6 +9,7 @@ public class helpPage extends JFrame {
         //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);// to avoid closing help page but closing all pages
         this.setContentPane(helpPage);
+        this.setIconImage(new ImageIcon("src/icons/logo.png").getImage());
 
         helpText.setText("This is an initial version of the UI home page and details pages, many features still need to be added later\n\n" +
                 "The three buttons on the home page control whether to activate the automatic control function " +

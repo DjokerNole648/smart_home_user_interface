@@ -15,6 +15,7 @@ public class curtainsDetailsPage extends JFrame{
         //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);// to avoid closing help page but closing all pages
         this.setContentPane(curtainsDetailsPage);
+        this.setIconImage(new ImageIcon("src/icons/logo.png").getImage());
 
         DB db = new DB();
         String response = db.makeGETRequest("https://studev.groept.be/api/a21ib2c04/select_real_time_control/" + App.ID);

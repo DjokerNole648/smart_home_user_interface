@@ -11,8 +11,8 @@ public class App {
 
     public static void main(String[] args)
     {
-        JFrame page = new loginPage();
-        loginPage newPage = new loginPage();
+        JFrame page = new loginPage("Welcome to the smart home!");
+        loginPage newPage = new loginPage("Welcome to the smart home!");
         if(db.checkIfRemember(response)){
             newPage.jtf.setText(db.getRememberedUserName(response));
             newPage.jpf.setText(db.getRememberedPassword(response));
